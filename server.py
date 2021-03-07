@@ -4,7 +4,12 @@ import data_manager
 
 app = Flask(__name__)
 
-
+@app.route('/comment', methods=['GET'])
+def comment():
+    id = request.args.get('id', type=str)
+    comments = data_manager.get_comment(id)
+    return render_template('comment.html', comments=comments)
+    
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
